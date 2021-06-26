@@ -10,7 +10,7 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const history = useHistory();
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,6 +19,19 @@ export default function Login() {
       setError('');
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      history.push('/');
+    } catch {
+      setError('Failed to log in');
+    }
+
+    setLoading(false);
+  }
+
+  async function handleGoogleSignIn() {
+    try {
+      setError('');
+      setLoading(true);
+      await loginWithGoogle();
       history.push('/');
     } catch {
       setError('Failed to log in');
@@ -42,10 +55,18 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className='w-100' type='submit'>
+            <Button disabled={loading} className='w-100 mb-3' type='submit'>
               Log In
             </Button>
           </Form>
+
+          <Button
+            disabled={loading}
+            className='w-100'
+            onClick={handleGoogleSignIn}
+          >
+            Sign Up with Google
+          </Button>
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
