@@ -19,9 +19,9 @@ function App() {
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path='/' component={Scheduler} />
+              <PrivateRoute exact path='/history' component={History} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/history' component={History} />
             </Switch>
           </AuthProvider>
         </Router>
