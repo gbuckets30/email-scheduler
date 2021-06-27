@@ -21,9 +21,26 @@ export default function Signup() {
     }
 
     try {
+      const URL = '/api/user';
+
       setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Randi Zuckerberg',
+          userEmail: emailRef.current.value,
+          emailList: [],
+          histories: [],
+        }),
+      };
+      const res = await fetch(`${URL}`, options);
+      const response = await res.json();
+      console.log(response);
       history.push('/');
     } catch {
       setError('Failed to create an account');

@@ -65,7 +65,7 @@ export default function Login() {
             className='w-100'
             onClick={handleGoogleSignIn}
           >
-            Sign Up with Google
+            Log in with Google
           </Button>
         </Card.Body>
       </Card>
